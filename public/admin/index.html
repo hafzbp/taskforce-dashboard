@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Upload · Taskforce Dashboard</title>
+  <link rel="icon" type="image/png" href="/nabati.png">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+  <link rel="stylesheet" href="/admin/admin-extra.css">
+</head>
+<body class="admin-page">
+  <header>
+    <a class="brand" href="/" aria-label="Kembali ke dashboard">
+      <img class="nabati-logo" src="/nabati.png" alt="Nabati">
+      <div><strong>Taskforce Dashboard🔥</strong><small>ADMIN DATA PUBLISHER</small></div>
+    </a>
+    <div class="header-actions"><a class="admin-back" href="/">Lihat dashboard</a></div>
+  </header>
+  <main class="admin-main">
+    <section class="admin-intro">
+      <p class="eyebrow">DAILY DATA UPDATE</p>
+      <h1>Publish sales report</h1>
+      <p>Upload report XLSX kumulatif. Sistem mengganti data pada rentang tanggal file dan mempertahankan periode lain, sehingga upload ulang tidak membuat data dobel.</p>
+    </section>
+
+    <section class="admin-grid">
+      <article class="panel upload-panel">
+        <div class="panel-heading"><div><h2>1. Akses admin</h2><p>Gunakan secret yang disimpan di Cloudflare.</p></div></div>
+        <label class="admin-field">Admin token
+          <input id="token" type="password" autocomplete="current-password" placeholder="Masukkan ADMIN_TOKEN">
+        </label>
+        <p class="field-note">Token hanya disimpan selama tab ini terbuka.</p>
+        <button id="initialize" class="initialize-button" disabled>Initialize database</button>
+
+        <div class="panel-heading step-heading"><div><h2>2. Pilih report</h2><p>Struktur kolom harus sama dengan sales report.</p></div></div>
+        <label class="drop-zone" id="dropZone">
+          <input id="file" type="file" accept=".xlsx" hidden>
+          <span class="drop-icon">↑</span>
+          <strong id="fileLabel">Pilih file XLSX</strong>
+          <small>Maksimum 60 MB</small>
+        </label>
+        <div id="fileSummary" class="file-summary" hidden></div>
+        <button id="publish" class="primary publish-button" disabled>Proses & publish</button>
+      </article>
+
+      <aside class="panel status-panel">
+        <div class="panel-heading"><div><h2>Status data online</h2><p>Snapshot yang sedang dibaca viewer.</p></div></div>
+        <dl id="onlineStatus" class="status-list"><dt>Status</dt><dd>Memuat…</dd></dl>
+        <div class="safety-note"><strong>Aman untuk upload ulang</strong><p>Data baru baru aktif setelah semua chunk selesai. Bila upload gagal, snapshot sebelumnya tetap tersedia.</p></div>
+      </aside>
+    </section>
+
+    <section id="progressCard" class="panel progress-card" hidden aria-live="polite">
+      <div class="progress-copy"><div><p class="eyebrow">PROCESSING</p><h2 id="progressTitle">Membaca report…</h2></div><strong id="progressPercent">0%</strong></div>
+      <p id="progressDetail">Mohon jangan tutup tab ini.</p>
+      <div class="admin-progress"><span id="progressBar"></span></div>
+    </section>
+    <div id="adminMessage" role="status" hidden></div>
+  </main>
+  <script src="/xlsx-reader.js"></script>
+  <script src="/admin/admin.js"></script>
+</body>
+</html>
