@@ -13,7 +13,7 @@
     {
       "binding": "DB",
       "database_name": "taskforce-dashboard-db",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "database_id": "5835b382-fd07-49e5-9497-c83230e25da5",
       "migrations_dir": "migrations"
     }
   ],
